@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>CompanySearch</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .company-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+        /*.movie-poster {*/
+        /*    max-width: 150px;*/
+        /*    margin-right: 20px;*/
+        /*}*/
+        .company-details {
+            flex-grow: 1;
+        }
+        .tags {
+            margin-top: 10px;
+        }
+        .tag {
+            background-color: #6c757d;
+            border-radius: 3px;
+            color: #fff;
+            display: inline-block;
+            font-size: 0.8rem;
+            margin-right: 5px;
+            margin-bottom: 5px;
+            padding: 5px 10px;
+        }
+    </style>
+</head>
+<body class="bg-dark text-light">
+<div class="container mt-5">
+    <h1 class="mb-4 text-center">CompanySearch</h1>
+    <form th:action="@{/search}" method="get" class="form-inline text-center">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control bg-dark text-light" name="query" placeholder="Введите запрос..."
+                   aria-label="Search" th:value="${query}">
+            <button class="btn btn-primary" type="submit">Искать</button>
+        </div>
+    </form>
+
+    <div th:if="${companysPage != null && companysPage.totalElements > 0}">
+        <h3 th:text="'Найдено ' + ${companysPage.totalElements}"></h3>
+
+        <!-- Список фильмов -->
+        <div th:each="company : ${companysPage.content}" class="company-item">
+            <div class="company-details">
+                <div>
+                    <h5 class="d-inline-block" th:text="${company.full_name}"></h5>
+                    <span class="float-end" th:text="${company.inn}"></span>
+                </div>
+                <p th:text="${company.inn}"></p>
+<!--                <p th:text="${movie.overview}"></p>-->
+<!--                <div class="tags">-->
+<!--                    <span th:each="actor : ${movie.actors}" class="tag" th:text="${actor}"></span>-->
+<!--                </div>-->
+            </div>
+            <hr/>
+        </div>
+
+        <!-- Пагинация -->
+        <nav aria-label="Page navigation" class="mt-4">
+            <ul class="pagination justify-content-center">
+                <li th:classappend="${companysPage.hasPrevious()} ? '' : 'disabled'" class="page-item">
+                    <a th:href="@{/search(query=${query}, page=${companysPage.number - 1}, size=${companysPage.size})}"
+                       class="page-link">Назад</a>
+                </li>
+
+                <li th:classappend="${companysPage.hasNext()} ? '' : 'disabled'" class="page-item">
+                    <a th:href="@{/search(query=${query}, page=${companysPage.number + 1}, size=${companysPage.size})}"
+                       class="page-link">Вперед</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+
+<!-- Bootstrap JS (optional) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
