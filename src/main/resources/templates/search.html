@@ -52,10 +52,14 @@
         <div th:each="company : ${companysPage.content}" class="company-item">
             <div class="company-details">
                 <div>
-                    <h5 class="d-inline-block" th:text="${company.full_name}"></h5>
-                    <span class="float-end" th:text="${company.inn}"></span>
+                    <h5 class="d-inline-block" th:utext="${company.short_name}"></h5>
+                    <p class="float-end" th:text="${'ОГРН:' + company.ogrn}"></p>
                 </div>
-                <p th:text="${company.inn}"></p>
+                <p th:utext="${company.full_name}"></p>
+                <div class="tags">
+                    <span class="tag" th:text="${'ИНН:' + company.inn}"></span>
+                    <span class="tag" th:text="${'КПП:' + company.kpp}"></span>
+                </div>
 <!--                <p th:text="${movie.overview}"></p>-->
 <!--                <div class="tags">-->
 <!--                    <span th:each="actor : ${movie.actors}" class="tag" th:text="${actor}"></span>-->

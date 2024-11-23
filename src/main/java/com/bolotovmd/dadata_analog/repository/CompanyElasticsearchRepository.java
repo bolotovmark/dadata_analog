@@ -16,7 +16,8 @@ public interface CompanyElasticsearchRepository extends ElasticsearchRepository<
                       "query": "?0",
                       "fields": ["full_name^4", "inn^3"],
                       "type": "best_fields",
-                      "operator": "or"
+                      "operator": "or",
+                      "fuzziness": "AUTO"
                     }
                   },
                   {
