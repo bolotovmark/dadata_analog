@@ -17,4 +17,6 @@ public interface CompanyRepository extends JpaRepository<Company, Long>{
                 ORDER BY LOWER(m.full_name) DESC
             """)
     Page<Company> searchByQuery(@Param("query") String query, Pageable pageable);
+
+    Company findByOgrn(String ogrn);
 }

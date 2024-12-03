@@ -14,7 +14,7 @@ public interface CompanyElasticsearchRepository extends ElasticsearchRepository<
                   {
                     "multi_match": {
                       "query": "?0",
-                      "fields": ["full_name^4", "inn^3"],
+                      "fields": ["full_name^4", "inn^2"],
                       "type": "best_fields",
                       "operator": "or",
                       "fuzziness": "AUTO"
@@ -24,7 +24,7 @@ public interface CompanyElasticsearchRepository extends ElasticsearchRepository<
                     "match_phrase": {
                       "full_name": {
                         "query": "?0",
-                        "boost": 3
+                        "boost": 2
                       }
                     }
                   },

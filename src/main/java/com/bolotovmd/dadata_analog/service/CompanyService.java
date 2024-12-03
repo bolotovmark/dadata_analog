@@ -26,6 +26,14 @@ public class CompanyService {
     @Autowired
     private CompanyElasticsearchRepository companyElasticsearchRepository;
 
+    public CompanyService(CompanyRepository companyRepository) {
+        this.companyRepository = companyRepository;
+    }
+
+    public void saveCompanies(List<Company> companies) {
+        companyRepository.saveAll(companies);
+    }
+
     public Page<Company> searchCompany(String query, int page, int size) {
         var pageable = PageRequest.of(page, size);
         return companyRepository.searchByQuery(query, pageable);

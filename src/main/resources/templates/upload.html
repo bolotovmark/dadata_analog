@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Загрузка XML файла</title>
+</head>
+<body>
+<h1>Загрузка XML файла</h1>
+<form method="post" action="/upload" enctype="multipart/form-data">
+    <label for="file">Выберите XML файл:</label>
+    <input type="file" id="file" name="file" accept=".xml" required>
+    <button type="submit">Загрузить</button>
+</form>
+<a href="/">local</a>
+<div th:if="${message}">
+    <p th:text="${message}"></p>
+</div>
+
+<div th:if="${companies}">
+    <h2>Загруженные компании:</h2>
+    <table border="1">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Дата выписки</th>
+            <th>ОГРН</th>
+            <th>ИНН</th>
+            <th>КПП</th>
+            <th>Полное название</th>
+            <th>Сокращенное название</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="company : ${companies}">
+            <td th:text="${company.id}">ID</td>
+            <td th:text="${company.vypiska_date}">Дата выписки</td>
+            <td th:text="${company.ogrn}">ОГРН</td>
+            <td th:text="${company.inn}">ИНН</td>
+            <td th:text="${company.kpp}">КПП</td>
+            <td th:text="${company.full_name}">Полное название</td>
+            <td th:text="${company.short_name}">Сокращенное название</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
