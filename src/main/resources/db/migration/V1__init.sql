@@ -16,9 +16,11 @@
 CREATE TABLE company (
     id SERIAL PRIMARY KEY,
     vypiska_date DATE,       -- Дата выписки (для актуализации)
-    ogrn VARCHAR(20),
-    inn VARCHAR(20),
-    kpp VARCHAR(20),
+    inn TEXT,
+    kpp TEXT,
+    ogrn TEXT,
+    ogrn_date DATE,
+    type TEXT,
     full_name TEXT,
     short_name TEXT
 );

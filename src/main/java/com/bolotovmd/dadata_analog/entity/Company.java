@@ -19,11 +19,19 @@ public class Company {
 
     private Date vypiska_date;
 
+    @Column(columnDefinition = "TEXT")
     private String ogrn;
 
+    private Date ogrn_date;
+
+    @Column(columnDefinition = "TEXT")
     private String inn;
 
+    @Column(columnDefinition = "TEXT")
     private String kpp;
+
+    @Column(columnDefinition = "TEXT")
+    private String type;
 
     @Column(columnDefinition = "TEXT")
     private String full_name;
