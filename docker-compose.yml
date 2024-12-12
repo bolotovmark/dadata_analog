@@ -35,3 +35,27 @@ services:
       - discovery.type=single-node
     ports:
       - "9200:9200"
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.17.22
+    container_name: kibana
+    depends_on:
+      - elasticsearch
+    ports:
+      - "5601:5601"
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+
+  logstash:
+    image: docker.elastic.co/logstash/logstash:8.17.0
+    container_name: logstash
+    depends_on:
+      - elasticsearch
+    ports:
+      - "5044:5044" # Logstash Beats input (e.g., Filebeat)
+      - "5001:5000" # Logstash TCP input
+      - "9600:9600" # Logstash monitoring API
+    volumes:
+      - ./logstash/pipeline:/usr/share/logstash/pipeline
+    environment:
+      - LS_JAVA_OPTS=-Xms1g -Xmx1g
